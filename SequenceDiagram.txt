@@ -1,0 +1,25 @@
+@startuml
+participant Patient
+participant App
+participant Backend
+participant AuthService
+participant RiskEngine
+participant ScheduleEngine
+participant DB
+participant NotificationService
+
+Patient -> App: Selects slot
+App -> Backend: Request(slot)
+Backend -> AuthService: Validate user
+AuthService --> Backend: Validated
+Backend -> RiskEngine: Get Risk Level
+RiskEngine --> Backend: Risk Score
+Backend -> ScheduleEngine: Assign Dentist
+ScheduleEngine -> DB: Create Appointment
+DB --> ScheduleEngine: Success
+ScheduleEngine -> NotificationService: Notify parties
+NotificationService --> ScheduleEngine: Sent
+ScheduleEngine --> Backend: Assigned
+Backend --> App: Booking Confirmation
+App --> Patient: Confirmed
+@enduml

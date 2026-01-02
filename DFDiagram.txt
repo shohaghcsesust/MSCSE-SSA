@@ -1,0 +1,41 @@
+@startuml
+[Patient] as P
+[Dentist] as D
+[Administrator] as A
+[Pharmacy] as Ph
+[Payment Gateway] as PG
+
+package "System Processes" {
+  [User Authentication] as UA
+  [Symptom Analysis] as SA
+  [Appointment Scheduling] as AS
+  [Video Consultation] as VC
+  [Notification Dispatch] as ND
+  [Prescription Management] as PM
+  [Reporting & Analytics] as RA
+}
+
+database "User Database" as UD
+database "Appointment Database" as AD
+database "Medical Records" as MR
+database "Audit Logs" as AL
+
+P --> UA : Credentials
+UA --> UD : Store/Retrieve
+P --> SA : Symptoms
+SA --> MR : Store Risk
+SA --> AS : Risk Score
+AS --> AD : Create Appointment
+D --> AS : Availability
+AS --> ND : Notify
+ND --> P : Email/SMS
+ND --> D : Push
+VC --> MR : Notes/Recordings
+D --> VC : Join/Conduct
+P --> VC : Join
+D --> PM : Generate Prescription
+PM --> Ph : Transmit
+RA --> A : Reports
+A --> UA : Manage Users
+PG --> AS : Process Payment (future)
+@enduml

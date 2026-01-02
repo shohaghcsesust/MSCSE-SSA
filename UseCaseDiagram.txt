@@ -1,0 +1,37 @@
+@startuml
+left to right direction
+actor "Patient" as P
+actor "Dentist" as D
+actor "Administrator" as A
+actor "Pharmacy (future)" as Ph
+
+P --> (Register and create profile)
+P --> (Log in securely)
+P --> (Enter symptoms and receive risk score)
+P --> (Book appointments)
+P --> (Join video consultations)
+P --> (View prescription history)
+P --> (Receive notifications)
+P --> (Cancel or modify bookings)
+P --> (Use clinic finder)
+
+D --> (Register with credentials)
+D --> (Manage availability calendar)
+D --> (View assigned appointments)
+D --> (Conduct video consultations)
+D --> (Generate digital prescriptions)
+D --> (Access patient records)
+D --> (Update treatment notes)
+D --> (Handle emergency requests)
+
+A --> (Manage user accounts)
+A --> (Monitor system performance)
+A --> (Generate usage reports)
+A --> (Configure system settings)
+A --> (Review audit logs)
+A --> (Handle support tickets)
+A --> (Manage clinic information)
+A --> (Oversee data backups)
+
+Ph --> (Receive e-prescriptions)
+@enduml

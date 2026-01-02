@@ -1,0 +1,116 @@
+@startuml
+entity User {
+  * UserID: int <<PK>>
+  --
+  Email: string
+  PasswordHash: string
+  FirstName: string
+  LastName: string
+  DateOfBirth: date
+  PhoneNumber: string
+  Address: string
+  UserType: string
+  CreatedDate: datetime
+}
+
+entity Dentist {
+  * DentistID: int <<PK>>
+  --
+  UserID: int <<FK>>
+  LicenceNumber: string
+  Specialisation: string
+  YearsExperience: int
+  ClinicID: int <<FK>>
+  Rating: float
+  AvailabilityJSON: json
+}
+
+entity Patient {
+  * PatientID: int <<PK>>
+  --
+  UserID: int <<FK>>
+  MedicalHistory: json
+}
+
+entity Appointment {
+  * AppointmentID: int <<PK>>
+  --
+  PatientID: int <<FK>>
+  DentistID: int <<FK>>
+  ScheduledDateTime: datetime
+  Status: string
+  RiskScore: float
+  PriorityScore: float
+  CreatedDate: datetime
+}
+
+entity SymptomRecord {
+  * SymptomID: int <<PK>>
+  --
+  PatientID: int <<FK>>
+  Symptoms: json
+  Severity: int
+  Duration: int
+  RiskScore: float
+  RecordedDate: datetime
+}
+
+entity Consultation {
+  * ConsultationID: int <<PK>>
+  --
+  AppointmentID: int <<FK>>
+  StartTime: datetime
+  EndTime: datetime
+  RecordingURL: string
+  Notes: string
+  Diagnosis: string
+  TreatmentPlan: string
+}
+
+entity Prescription {
+  * PrescriptionID: int <<PK>>
+  --
+  ConsultationID: int <<FK>>
+  DentistID: int <<FK>>
+  PatientID: int <<FK>>
+  Medication: string
+  Dosage: string
+  Duration: string
+  Instructions: string
+  IssuedDate: datetime
+}
+
+entity Clinic {
+  * ClinicID: int <<PK>>
+  --
+  ClinicName: string
+  Address: string
+  PhoneNumber: string
+  Email: string
+  OperatingHours: json
+  Facilities: json
+}
+
+entity Reminder {
+  * ReminderID: int <<PK>>
+  --
+  AppointmentID: int <<FK>>
+  ReminderType: string
+  ScheduledTime: datetime
+  DeliveryMethod: string
+  Status: string
+}
+
+User ||--o{ Appointment : "books"
+User ||--o{ SymptomRecord : "submits"
+User ||--o{ Prescription : "receives"
+Dentist ||--o{ Appointment : "handles"
+Dentist ||--o{ Consultation : "conducts"
+Dentist ||--o{ Prescription : "issues"
+Appointment ||--|| Consultation : "has"
+Appointment ||--o{ Reminder : "triggers"
+Clinic ||--o{ Dentist : "employs"
+Clinic ||--o{ Appointment : "hosts"
+SymptomRecord ||--o| Appointment : "leads to"
+Consultation ||--o{ Prescription : "results in"
+@enduml

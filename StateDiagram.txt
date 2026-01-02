@@ -1,0 +1,12 @@
+@startuml
+[*] --> Created
+Created --> Confirmed : Dentist accepts (within 24h)
+Confirmed --> InProgress : Party joins session
+InProgress --> Completed : Dentist marks finished
+Created --> Cancelled : Cancel (with notice)
+Confirmed --> Cancelled : Cancel (2h notice)
+Confirmed --> Missed : No join (after 15min)
+Completed --> [*]
+Cancelled --> [*]
+Missed --> [*]
+@enduml

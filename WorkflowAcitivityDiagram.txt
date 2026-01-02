@@ -1,0 +1,11 @@
+@startuml
+start
+:Patient submits request with symptoms and time;
+:Check dentist availability;
+:Calculate risk score;
+:Assign priority with adjustments;
+:Resolve conflicts and select dentist;
+:Assign dentist;
+:Notify all parties;
+stop
+@enduml

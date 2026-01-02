@@ -1,0 +1,44 @@
+@startuml
+class User {
+  +userID: int
+  +email: string
+  +passwordHash: string
+  +type: string
+  +profileData: json
+}
+
+class Dentist extends User {
+  +licenseNo: string
+  +specialization: string
+  +availability: json
+}
+
+class Patient extends User {
+  +medicalHistory: json
+}
+
+class Appointment {
+  +appointmentID: int
+  +scheduledTime: datetime
+  +status: string
+  +riskScore: float
+}
+
+class Consultation {
+  +consultationID: int
+  +startTime: datetime
+  +endTime: datetime
+  +notes: string
+}
+
+class Prescription {
+  +prescriptionID: int
+  +medication: string
+  +dosage: string
+}
+
+User "1" -- "0..*" Appointment
+Dentist "1" -- "0..*" Appointment
+Appointment "1" -- "1" Consultation
+Consultation "1" -- "0..*" Prescription
+@enduml

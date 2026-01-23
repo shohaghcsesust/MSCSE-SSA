@@ -1,37 +1,86 @@
 @startuml
 left to right direction
 actor "Patient" as P
+
+rectangle "Patient Use Cases" {
+  usecase "Register Profile" as UC_P1
+  usecase "Secure Login" as UC_P2
+  usecase "Symptom Risk Score" as UC_P3
+  usecase "Book Appointments" as UC_P4
+  usecase "Video Consultations" as UC_P5
+  usecase "Prescription History" as UC_P6
+  usecase "Notifications" as UC_P7
+  usecase "Modify Bookings" as UC_P8
+  usecase "Clinic Finder" as UC_P9
+}
+
+P --> UC_P1
+P --> UC_P2
+P --> UC_P3
+P --> UC_P4
+P --> UC_P5
+P --> UC_P6
+P --> UC_P7
+P --> UC_P8
+P --> UC_P9
+@enduml
+
+@startuml
+left to right direction
 actor "Dentist" as D
+
+rectangle "Dentist Use Cases" {
+  usecase "Register Credentials" as UC_D1
+  usecase "Manage Calendar" as UC_D2
+  usecase "View Appointments" as UC_D3
+  usecase "Conduct Consultations" as UC_D4
+  usecase "Generate Prescriptions" as UC_D5
+  usecase "Access Records" as UC_D6
+  usecase "Update Notes" as UC_D7
+  usecase "Handle Emergencies" as UC_D8
+}
+
+D --> UC_D1
+D --> UC_D2
+D --> UC_D3
+D --> UC_D4
+D --> UC_D5
+D --> UC_D6
+D --> UC_D7
+D --> UC_D8
+@enduml
+
+@startuml
+left to right direction
 actor "Administrator" as A
+
+rectangle "Administrator Use Cases" {
+  usecase "Manage Accounts" as UC_A1
+  usecase "Monitor Performance" as UC_A2
+  usecase "Generate Reports" as UC_A3
+  usecase "Configure Settings" as UC_A4
+  usecase "Review Logs" as UC_A5
+  usecase "Handle Tickets" as UC_A6
+  usecase "Manage Clinics" as UC_A7
+  usecase "Oversee Backups" as UC_A8
+}
+
+A --> UC_A1
+A --> UC_A2
+A --> UC_A3
+A --> UC_A4
+A --> UC_A5
+A --> UC_A6
+A --> UC_A7
+A --> UC_A8
+@enduml
+
+@startuml
+left to right direction
 actor "Pharmacy (future)" as Ph
 
-P --> (Register and create profile)
-P --> (Log in securely)
-P --> (Enter symptoms and receive risk score)
-P --> (Book appointments)
-P --> (Join video consultations)
-P --> (View prescription history)
-P --> (Receive notifications)
-P --> (Cancel or modify bookings)
-P --> (Use clinic finder)
-
-D --> (Register with credentials)
-D --> (Manage availability calendar)
-D --> (View assigned appointments)
-D --> (Conduct video consultations)
-D --> (Generate digital prescriptions)
-D --> (Access patient records)
-D --> (Update treatment notes)
-D --> (Handle emergency requests)
-
-A --> (Manage user accounts)
-A --> (Monitor system performance)
-A --> (Generate usage reports)
-A --> (Configure system settings)
-A --> (Review audit logs)
-A --> (Handle support tickets)
-A --> (Manage clinic information)
-A --> (Oversee data backups)
-
-Ph --> (Receive e-prescriptions)
+rectangle "Pharmacy (future)" {
+  usecase "Receive E-Prescriptions" as UC1
+}
+Ph --> UC1
 @enduml

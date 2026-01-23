@@ -1,6 +1,6 @@
 @startuml
-participant Patient
-participant App
+actor Patient
+participant "E-Dentist" as App
 participant Backend
 participant AuthService
 participant RiskEngine
@@ -22,4 +22,111 @@ NotificationService --> ScheduleEngine: Sent
 ScheduleEngine --> Backend: Assigned
 Backend --> App: Booking Confirmation
 App --> Patient: Confirmed
+@enduml
+
+
+@startuml
+skinparam sequenceArrowThickness 2
+skinparam sequenceParticipant underline
+
+actor Patient as P
+participant "E-Dentist" as S
+actor Dentist as D
+actor "Pharmacy (future)" as Ph
+
+note over P, D: Assumption: Both Patient and Dentist are logged in
+
+P -> S: Request to join video consultation (with appointment ID)
+S --> P: Confirm joining and provide video link
+S -> D: Notify Dentist of patient ready (push notification or alert)
+
+D -> S: Acknowledge notification and start session
+activate S
+activate D
+
+D -> S: Request patient records (medical history, previous visits)
+S --> D: Provide patient records securely
+
+P <-> D: Establish video connection (audio/video stream starts)
+
+P -> D: Describe symptoms and concerns (via video/audio/chat)
+D -> P: Ask clarifying questions (e.g., pain level, duration, visuals if possible)
+
+alt If visual inspection needed
+  P -> D: Share images or live video of affected area
+end
+
+D -> S: Record preliminary notes during consultation
+
+P <-> D: Discuss diagnosis and treatment plan
+
+D -> S: Enter final diagnosis
+D -> S: Generate digital prescription (medication details, dosage)
+S --> D: Confirm prescription generated
+
+S -> Ph: Transmit e-prescription securely
+Ph --> S: Acknowledge receipt
+
+S --> P: Send prescription notification (email/SMS/app alert) with access link
+S --> P: Send consultation summary and follow-up instructions
+
+D -> S: Update treatment notes (post-consultation details)
+D -> S: End consultation session
+deactivate D
+
+S --> P: End video connection
+S --> D: Confirm session ended
+deactivate S
+
+note over S: System logs the consultation for records and billing
+@enduml
+
+@startuml
+skinparam sequenceArrowThickness 2
+skinparam sequenceParticipant underline
+
+actor Administrator as A
+participant "E-Dentist" as S
+actor Dentist as D
+actor Patient as P
+
+note over A, S: Assumption: Administrator is logged in with appropriate permissions
+
+A -> S: Request user account management dashboard
+S --> A: Display list of user accounts (patients, dentists, admins) with search/filter options
+
+A -> S: Search for specific user (e.g., by name, email, role)
+S --> A: Return matching user accounts with basic details (ID, name, role, status)
+
+A -> S: Select a user account (by ID)
+S --> A: Provide detailed account info (profile, credentials, activity history)
+
+alt Create New Account
+  A -> S: Initiate new account creation (select role: Patient/Dentist)
+  A -> S: Enter user details (name, email, credentials)
+  S --> A: Validate input and confirm creation
+  S -> D: Send welcome/notification email (if Dentist)
+  S -> P: Send welcome/notification email (if Patient)
+end
+
+alt Update Existing Account
+  A -> S: Edit user details (e.g., update email, reset password, change role)
+  S --> A: Validate changes and confirm update
+  S -> D: Notify of changes (if applicable)
+  S -> P: Notify of changes (if applicable)
+end
+
+alt Deactivate/Delete Account
+  A -> S: Select deactivate or delete option
+  S --> A: Confirm action with warnings (e.g., data loss)
+  A -> S: Proceed with deactivation/deletion
+  S --> A: Confirm account status updated
+  S -> D: Notify of deactivation (if applicable)
+  S -> P: Notify of deactivation (if applicable)
+end
+
+A -> S: Log out or return to dashboard
+S --> A: Acknowledge and update audit logs
+
+note over S: System records all actions in audit logs for security
 @enduml

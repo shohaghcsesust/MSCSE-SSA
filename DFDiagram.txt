@@ -1,41 +1,72 @@
 @startuml
-[Patient] as P
-[Dentist] as D
-[Administrator] as A
-[Pharmacy] as Ph
-[Payment Gateway] as PG
+skinparam rectangle {
+  borderColor Black
+  backgroundColor #E6F3FF
+}
+skinparam usecase {
+  borderColor #004080
+  backgroundColor #CCFFCC
+}
+skinparam database {
+  borderColor #663300
+  backgroundColor #FFFACD
+}
+skinparam arrowThickness 2
+skinparam shadowing false
 
-package "System Processes" {
-  [User Authentication] as UA
-  [Symptom Analysis] as SA
-  [Appointment Scheduling] as AS
-  [Video Consultation] as VC
-  [Notification Dispatch] as ND
-  [Prescription Management] as PM
-  [Reporting & Analytics] as RA
+left to right direction
+
+actor "Patient" as P
+actor "Dentist" as D
+actor "Administrator" as A
+rectangle "Pharmacy (future)" as Ph
+rectangle "Payment Gateway" as PG
+
+package "Core System Processes" {
+  usecase "Authenticate User" as UA
+  usecase "Analyze Symptoms" as SA
+  usecase "Schedule Appointment" as AS
+  usecase "Video Consultation" as VC
+  usecase "Send Notifications" as ND
+  usecase "Manage Prescriptions" as PM
+  usecase "Generate Reports" as RA
 }
 
-database "User Database" as UD
-database "Appointment Database" as AD
+database "User Profiles" as UD
+database "Appointments" as AD
 database "Medical Records" as MR
 database "Audit Logs" as AL
 
-P --> UA : Credentials
-UA --> UD : Store/Retrieve
-P --> SA : Symptoms
-SA --> MR : Store Risk
-SA --> AS : Risk Score
-AS --> AD : Create Appointment
-D --> AS : Availability
-AS --> ND : Notify
-ND --> P : Email/SMS
-ND --> D : Push
-VC --> MR : Notes/Recordings
-D --> VC : Join/Conduct
-P --> VC : Join
-D --> PM : Generate Prescription
-PM --> Ph : Transmit
-RA --> A : Reports
-A --> UA : Manage Users
-PG --> AS : Process Payment (future)
+P --> UA : login / register
+UA <--> UD : store / validate
+
+P --> SA : submit symptoms
+SA --> MR : save risk score
+SA --> AS : pass risk score
+
+P --> AS : book / cancel
+D --> AS : set availability
+AS <--> AD : create / update
+AS --> ND : trigger notice
+
+ND --> P : confirmation / reminder
+ND --> D : new booking alert
+
+P --> VC : join
+D --> VC : conduct
+VC <--> MR : save notes & recordings
+
+D --> PM : create prescription
+PM --> MR : archive
+PM --> Ph : send e-prescription
+
+A --> UA : manage accounts
+A --> RA : request reports
+RA <--> AL : read logs
+RA --> A : deliver reports
+
+note right of AS : Future feature
+AS --> PG : process payment
+PG --> AS : confirm payment
+
 @enduml

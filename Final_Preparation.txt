@@ -1,0 +1,53 @@
+2 papers: 20 marks
+UI/UX  guidelines and standardisation: 10 marks
+------------------------------------------------
+
+UI Guidelines and standards:
+1. Design Principles - We followed Atomic Design, Material Design (Others can be Apple Design, Liquid Design, Glassmorphism, Neubrutalism, IBM Carbon Design System - search Online you will Find) 
+2. Design Practices and Standards: Color, Typography, Icon, Components, Token/Variables
+3. Design Tools: UI Design vs Prototyping -  Figma, Penpot. Protopie or Mockupps
+3. Design Evaluation: NPS, CSAT and CES
+If you study these: 
+UI/UX  guidelines and standardisation: 10 marks
+this should be covered.
+
+Guidelines and standards. Following guidance needs to do the UI design (sketch).
+
+
+Paper1::
+Paper-1 Easy Approach to Requirements Syntax ( EARS)
+With some sample question
+sample questin from this paper:
+1. Natural language requirements often cause problems during software development. Identify and briefly explain any four common requirement problems that the EARS approach aims to solve.
+
+2. Explain how the use of structured EARS templates (WHEN, WHILE, IF–THEN, WHERE) helps reduce ambiguity and complexity in requirements.
+
+3. Consider an online examination system.
+Write: one Event-driven requirement, and one State-driven requirement using proper EARS syntax.
+
+4. What is meant by ubiquitous requirements in EARS? Mention one practical example.
+
+5. Why does EARS prefer simple natural-language templates instead of formal notations like UML or Z at the stakeholder requirements level?
+
+Paper2::
+This is the Sample ques from Group-03.
+
+Paper - On the Challenges to Documenting Requirements in Agile
+Software Development: A Practitioners’ Perspective
+
+Ques:
+A mid-sized software company follows Agile Software Development (ASD) to build a cloud-based enterprise management system. The team primarily uses user stories as the only form of requirements documentation and relies heavily on verbal communication during sprint meetings. Due to tight deadlines and a strong focus on rapid delivery, requirements are often documented at a high level and are not consistently updated when changes occur.
+The organization does not employ a dedicated requirements engineering specialist. Instead, responsibility for documenting and refining requirements is shared among developers and the product owner, based largely on individual experience rather than formal requirements engineering practices. The team believes that extensive documentation conflicts with Agile principles and prefers to prioritize working software over maintaining detailed artifacts.
+As development progresses, several issues become evident. Features are frequently reworked after implementation because developers interpret the same user stories differently. Stakeholders report that delivered functionality does not fully align with documented business requirements, requiring additional clarification and modification in later sprints. These revisions increase development effort and delay sprint goals.
+
+a. Explain the concept of requirements technical debt in Agile Software Development (ASD) and discuss its impacts.
+
+b. Based on the scenario, identify and explain two indicators of requirements technical debt. Justify your answer using evidence from the Paper.
+
+c. Discuss the role of requirements engineering expertise in Agile teams. Why do practitioners believe that assigning documentation responsibility to non-specialists is problematic?
+
+d. What are the cultural challenges within ASD teams that negatively affect requirements documentation. How does the Agile mindset contribute to these challenges?
+
+e. The paper reports several strategies applied by ASD teams when requirements documentation issues occur. 
+Identify and explain two such strategies, and discuss how they could be applied in the given scenario to improve requirements documentation.
+
